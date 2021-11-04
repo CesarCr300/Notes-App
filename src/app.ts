@@ -13,10 +13,6 @@ app.get("/", async (req, res) => {
       password: "Stick",
     });
     console.log("El usuario es: ", user);
-    // const note = await Notes.create({
-    //   description: "This is an example of one note",
-    //   title: "This is a title", expectedDate: undefined
-    // , UserId: undefined});
     await user.createNote({
       description: "This is an example of one note",
       title: "This is a title",
@@ -25,10 +21,9 @@ app.get("/", async (req, res) => {
     const data = await Notes.findAll();
     const dataUser = await User.findAll({
       include: [User.associations.notes],
-      attributes: ["username"],
     });
     console.log(data);
-    console.log("dataUser", dataUser);
+    return res.json(dataUser)
   } catch (error) {
     console.log(error);
     return res.send("el usuario ya esta en uso");
