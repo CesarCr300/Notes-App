@@ -5,23 +5,25 @@ export const sequelize = new Sequelize("passport", "root", "", {
   dialect: "mysql",
 });
 
-function asociations() {
-  UserToNotes;
-}
+// function asociations() {
+//   UserToNotes;
+// }
 
-import User from "../user/model";
 import Notes from "../notes/model";
-import UserToNotes from "./asociations/userToNotes";
+import User from "../user/model";
+// import UserToNotes from "./asociations/userToNotes";
 
-function initilizationTables() {
+const models = [Notes, User]
+
+function initilizationTables():void {
   Notes;
   User;
 }
 
 export default async function connectDB() {
   initilizationTables();
-  asociations();
-  await sequelize.sync({force: false});
+  // asociations();
+  await sequelize.sync({force: true});
   console.log("La base de datos se conecto")
 }
 
