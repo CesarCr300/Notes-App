@@ -1,8 +1,9 @@
-import connectionDB from "./db";
+import db from "../models";
 import app from "./app";
 
-connectionDB();
-
-app.listen(app.get("port"), () => {
-  console.log("funcionando");
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("DB connected");
+  app.listen(app.get("port"), () => {
+    console.log("funcionando");
+  });
 });

@@ -14,7 +14,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     password!: string;
     email!: string;
     static associate(models: any) {
-      User.belongsToMany(models.Notes, {
+      User.belongsToMany(models.Note, {
         through: "User_Notes"
       })
     }
