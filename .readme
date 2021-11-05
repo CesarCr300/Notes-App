@@ -1,0 +1,3 @@
+with the comand: "npx sequelize-cli init" I can create files with the basics configurations of sequelize.
+
+with the comand: "npx sequelize-cli model:generate --name User --attributes attribute:type,attribute:type" I can create a fast model.
