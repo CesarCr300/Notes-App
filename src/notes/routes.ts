@@ -9,8 +9,8 @@ import {
 
 export const router = Router();
 
-router.route("/").get(getNotes).post(createNote);
+router.route("/").get(getNotes);
 
-router.route("/:id").get(getNote).delete(destroyNote).put(updateNote);
+// router.route("/:id").get(getNote).delete(destroyNote).put(updateNote);
 
-router.get("/", getNotes);
+// router.get("/", getNotes);

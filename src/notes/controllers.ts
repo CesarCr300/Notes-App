@@ -3,8 +3,12 @@ import { Request, Response } from "express";
 import db from "../../models";
 
 export const getNotes = async (req: Request, res: Response) => {
-  const data = await db.Note.findAll();
-  res.render("./notes/index.ejs", {data});
+  try {
+    let data = await db.Note.findAll();
+    res.render("./notes/index.ejs", { data });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const getNote = async (req: Request, res: Response) => {

@@ -24,13 +24,24 @@ const notes = [
   },
 ];
 
-const associations = [{ UserId: 1, NoteId: 2 }, {UserId:2, NoteId:1}];
+const associations = [
+  { UserId: 1, NoteId: 2 },
+  { UserId: 2, NoteId: 1 },
+];
 
 export async function seeds() {
   for (let i = 0; i < users.length; i++) {
-    await db.User.create(users[i])
-    await db.Note.create(notes[i])
+    try {
+      await db.User.create(users[i]);
+      await db.Note.create(notes[i]);
+    } catch (err) {
+      console.log(err);
+    }
   }
-  await db.User_Note.create(associations[0])
-  await db.User_Note.create(associations[1])
+  try {
+    await db.User_Note.create(associations[0]);
+    await db.User_Note.create(associations[1]);
+  } catch (err) {
+    console.log(err);
+  }
 }
