@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+
+.form-new-note {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}

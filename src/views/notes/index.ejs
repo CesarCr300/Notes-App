@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notes App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -14,17 +15,23 @@
     </header>
     <main>
         <section>
-            <button class="btn btn-add-note">Create a new note</button>
+            <form class="form form-new-note">
+                <input placeholder="Title" type="text" class="note-title" id="input-note-title">
+                <textarea name="" id="text-area-note-description" cols="30" rows="5" class="note-description"></textarea>
+                <button class="btn btn-add-note">Create a new note</button>
+            </form>
         </section>
         <section class="notes-grid">
             <% for (let i = 0; i <data.length;i++){ %>
-                <article>
-                    <h2>
+                <article class="note">
+                    <h2 class="note-title">
                         <%- data[i].title %>
                     </h2>
-                    <p>
+                    <p class="note-description">
                         <%- data[i].description %>
                     </p>
+                    <button class="btn btn-delete">Delete</button>
+                    <button class="btn btn-update">Update</button>
                 </article>
                 <% }  %>
         </section>

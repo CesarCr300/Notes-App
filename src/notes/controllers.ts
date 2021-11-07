@@ -7,7 +7,6 @@ export const getNotes = async (req: Request, res: Response) => {
     let data = await db.Note.findAll();
     res.render("./notes/index.ejs", { data });
   } catch (err) {
-    console.log(err);
   }
 };
 
@@ -20,10 +19,9 @@ export const getNote = async (req: Request, res: Response) => {
   }
 };
 
-export const createNote = async (req: Request, res: Response) => {
-  const { title, description } = req.body;
+export const createNote = async (title:string, description:string) => {
   const data = await db.Note.create({ title, description });
-  res.json(data);
+  return data;
 };
 
 export const destroyNote = async (req: Request, res: Response) => {
