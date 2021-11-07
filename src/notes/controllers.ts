@@ -24,15 +24,14 @@ export const createNote = async (title:string, description:string) => {
   return data;
 };
 
-export const destroyNote = async (req: Request, res: Response) => {
+export const destroyNote = async(id:number) => {
   let data;
   try {
-    data = await db.Note.findByPk(req.params.id);
+    data = await db.Note.findByPk(id);
     await data.destroy();
   } catch (err) {
     console.log(err);
   }
-  res.json(data);
 };
 
 export const updateNote = async (req: Request, res: Response) => {

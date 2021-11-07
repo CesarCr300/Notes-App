@@ -4,7 +4,7 @@ import app from "./app";
 import db from "../models";
 import { seeds } from "../seeders";
 
-import { createNote, getNotes } from "./notes/controllers";
+import { createNote, destroyNote, getNotes } from "./notes/controllers";
 
 db.sequelize.sync({ force: true }).then(async () => {
   console.log("DB connected");
@@ -17,6 +17,10 @@ db.sequelize.sync({ force: true }).then(async () => {
     socket.on("note:new", async function ({ title, description }) {
       const newNote = await createNote(title, description);
       serverIo.emit("note:new", newNote);
+    });
+    socket.on("note:destroy", async function (id: number) {
+      await destroyNote(id)
+      serverIo.emit("note:destroy", (id))
     });
   });
 });

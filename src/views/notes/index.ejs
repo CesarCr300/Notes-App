@@ -23,13 +23,15 @@
         </section>
         <section class="notes-grid">
             <% for (let i = 0; i <data.length;i++){ %>
-                <article class="note" id=<%- data[i].id%>>
-                    <h2 class="note-title">
-                        <%- data[i].title %>
-                    </h2>
-                    <p class="note-description">
-                        <%- data[i].description %>
-                    </p>
+                <article class="note" id=<%- "note-"+data[i].id%>>
+                    <div class="content">
+                        <h2 class="note-title">
+                            <%- data[i].title %>
+                        </h2>
+                        <p class="note-description">
+                            <%- data[i].description %>
+                        </p>
+                    </div>
                     <button class="btn btn-update">Update</button>
                     <button class="btn btn-delete">Delete</button>
                 </article>
