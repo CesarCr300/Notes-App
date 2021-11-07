@@ -1,6 +1,3 @@
-// const { createNote } = require("./ui");
-// import {createNote} from './ui'
-
 const socket = io();
 
 const containerNotes = document.querySelector(".notes-grid");
@@ -11,6 +8,14 @@ const textAreaNoteDescription = document.querySelector(
   "#text-area-note-description"
 );
 
+const buttonsDelete = document.querySelectorAll('.btn-delete')
+// console.log(buttonsDelete);
+
+// buttonsDelete.forEach(btn=>btn.addEventListener("click",(e)=>{
+//   const note = btn.parentElemnt
+  
+// }))
+
 formNewNote.addEventListener("submit", (e) => {
   e.preventDefault();
   const title = inputNoteTitle.value;
@@ -19,17 +24,6 @@ formNewNote.addEventListener("submit", (e) => {
 });
 
 socket.on("note:new", (data) => {
-  createNote(data);
-  //   const note = document.createElement("article");
-  //   const title = document.createElement("h2");
-  //   const description = document.createElement("p");
-
-  //   title.innerHTML = data.title;
-  //   description.innerHTML = data.description;
-
-  //   note.classList.add("note");
-  //   note.appendChild(title);
-  //   note.appendChild(description);
-
+  const note = createNote(data);
   containerNotes.appendChild(note);
 });

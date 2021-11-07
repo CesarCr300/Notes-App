@@ -23,22 +23,24 @@
         </section>
         <section class="notes-grid">
             <% for (let i = 0; i <data.length;i++){ %>
-                <article class="note">
+                <article class="note" id=<%- data[i].id%>>
                     <h2 class="note-title">
                         <%- data[i].title %>
                     </h2>
                     <p class="note-description">
                         <%- data[i].description %>
                     </p>
-                    <button class="btn btn-delete">Delete</button>
                     <button class="btn btn-update">Update</button>
+                    <button class="btn btn-delete">Delete</button>
                 </article>
                 <% }  %>
         </section>
     </main>
     <footer></footer>
+    <!-- Previamente importar jQuery -->
     <script src="/socket.io/socket.io.js"></script>
-    <script src="main.js" type="text/javascript"></script>
+    <script src='scripts/ui.js'></script>
+    <script src="scripts/main.js" type="text/javascript"></script>
 </body>
 
 </html>
