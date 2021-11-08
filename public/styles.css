@@ -7,3 +7,9 @@
     flex-direction: column;
     width: 300px;
 }
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}

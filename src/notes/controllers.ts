@@ -34,15 +34,14 @@ export const destroyNote = async(id:number) => {
   }
 };
 
-export const updateNote = async (req: Request, res: Response) => {
+export const updateNote = async (title:string, description:string, id:number) => {
   let data;
   try {
-    const { title, description, id } = req.body;
     data = await db.Note.findByPk(id);
     data.set({ title, description });
     await data.save();
   } catch (err) {
     console.log(err);
   }
-  res.json(data);
+  return data;
 };

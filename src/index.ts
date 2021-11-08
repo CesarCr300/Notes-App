@@ -4,7 +4,7 @@ import app from "./app";
 import db from "../models";
 import { seeds } from "../seeders";
 
-import { createNote, destroyNote, getNotes } from "./notes/controllers";
+import { createNote, destroyNote, updateNote } from "./notes/controllers";
 
 db.sequelize.sync({ force: true }).then(async () => {
   console.log("DB connected");
@@ -18,6 +18,11 @@ db.sequelize.sync({ force: true }).then(async () => {
       const newNote = await createNote(title, description);
       serverIo.emit("note:new", newNote);
     });
+    socket.on("note:update", async({id, title, description}) => {
+      const note = await updateNote(title, description, id);
+      serverIo.emit("note:update", note)
+      // socket.broadcast.emit("note:update otherPages")
+    })
     socket.on("note:destroy", async function (id: number) {
       await destroyNote(id)
       serverIo.emit("note:destroy", (id))
