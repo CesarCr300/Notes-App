@@ -1,5 +1,30 @@
+:root {
+    --color-black: #202124;
+    --color-white: #e8eaed;
+}
+
 * {
     box-sizing: border-box;
+}
+
+html {
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+input {
+    padding: 0.5em;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border: 1px solid var(--color-white);
+}
+
+textarea {
+    resize: none;
+    overflow: hidden;
+    min-height: 50px;
+    /* max-height: 100px; */
+    /* height: 200px; */
 }
 
 .form-new-note {
@@ -12,4 +37,18 @@
     display: flex;
     flex-direction: column;
     width: 300px;
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    hyphens: auto;
+    gap: 20px;
+}
+
+.note {
+    max-width: 100%;
+    hyphens: auto;
+    border: 1px solid var(--color-white);
+    border-radius:10px;
 }

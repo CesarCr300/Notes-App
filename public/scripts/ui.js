@@ -1,3 +1,8 @@
+function autoGrow(oField) {
+  if (oField.scrollHeight > oField.clientHeight) {
+    oField.style.height = oField.scrollHeight + "px";
+  }
+}
 function eventDeleteNote(btn) {
   btn.addEventListener("click", (e) => {
     const note = btn.parentNode;
@@ -13,8 +18,8 @@ function eventCreateEditableNote(content) {
       const descriptionElement = content.querySelector("p");
       const title = titleElement.innerText;
       const description = descriptionElement.innerText;
-      content.removeChild(titleElement);
-      content.removeChild(descriptionElement);
+
+      removeChilds(content, [titleElement, descriptionElement]);
 
       const titleEditable = document.createElement("input");
       titleEditable.classList.add("note-title");
@@ -23,9 +28,11 @@ function eventCreateEditableNote(content) {
       const descriptionEditable = document.createElement("textarea");
       descriptionEditable.classList.add("note-description");
       descriptionEditable.value = description;
+      descriptionEditable.addEventListener("input", (e) => {
+        autoGrow(descriptionEditable);
+      });
 
-      content.appendChild(titleEditable);
-      content.appendChild(descriptionEditable);
+      appendChilds(content, [titleEditable, descriptionEditable]);
     }
   });
 }
@@ -69,15 +76,12 @@ function createNote({ title, description, id }) {
   eventUpdateNote(btnUpdate);
 
   content.classList.add("content");
-  content.appendChild(titleNote);
-  content.appendChild(descriptionNote);
+  appendChilds(content, [titleNote, descriptionNote]);
   eventCreateEditableNote(content);
 
   note.classList.add("note");
   note.setAttribute("id", `note-${id}`);
-  note.appendChild(content);
-  note.appendChild(btnUpdate);
-  note.appendChild(btnDelete);
+  appendChilds(note, [content, btnDelete, btnUpdate]);
   return note;
 }
 

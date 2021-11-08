@@ -1,3 +1,4 @@
+
 const socket = io();
 
 const containerNotes = document.querySelector(".notes-grid");
@@ -8,6 +9,9 @@ const inputNoteTitle = document.querySelector("#input-note-title");
 const textAreaNoteDescription = document.querySelector(
   "#text-area-note-description"
 );
+textAreaNoteDescription.addEventListener("input", ()=>{
+  autoGrow(textAreaNoteDescription)
+})
 //content of a note(title, description)
 const contentNotes = document.querySelectorAll(".note>.content");
 
@@ -41,8 +45,8 @@ socket.on("note:destroy", (id) => {
 
 contentNotes.forEach((content) => eventCreateEditableNote(content));
 
-btnsUpdate.forEach((btn) =>
-  eventUpdateNote(btn)
-);
+btnsUpdate.forEach((btn) => {
+  eventUpdateNote(btn);
+});
 
-socket.on("note:update", note=>updateNote(note));
+socket.on("note:update", (note) => updateNote(note));
