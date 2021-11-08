@@ -7,13 +7,15 @@ const inputNoteTitle = document.querySelector("#input-note-title");
 const textAreaNoteDescription = document.querySelector(
   "#text-area-note-description"
 );
-let contentNote = document.querySelectorAll(".note>.content");
+const contentNote = document.querySelectorAll(".note>.content");
 
 formNewNote.addEventListener("submit", (e) => {
   e.preventDefault();
   const title = inputNoteTitle.value;
   const description = textAreaNoteDescription.value;
   socket.emit("note:new", { title, description });
+  inputNoteTitle.value = "";
+  textAreaNoteDescription.value = "";
 });
 
 socket.on("note:new", (data) => {
@@ -23,14 +25,7 @@ socket.on("note:new", (data) => {
 
 const buttonsDelete = document.querySelectorAll(".btn-delete");
 
-buttonsDelete.forEach((btn) =>
-  btn.addEventListener("click", (e) => {
-    const note = btn.parentNode;
-    const noteId = note.id.split("-")[1];
-    socket.emit("note:destroy", parseInt(noteId));
-    buttonsDelete = document.querySelectorAll(".btn-delete");
-  })
-);
+buttonsDelete.forEach((btn) => eventDeleteNote(btn));
 
 socket.on("note:destroy", (id) => {
   const note = document.querySelector(`#note-${id}`);
