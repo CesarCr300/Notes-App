@@ -98,10 +98,10 @@ function updateNoteSamePage(note) {
 }
 
 socket.on("note:update", (note) => {
-  try {
-    const { id, title, description } = note;
-    const contentElement = document.querySelector(`#note-${id}>.content`);
-    const inputElement = contentElement.querySelector("input");
+  const { id, title, description } = note;
+  const contentElement = document.querySelector(`#note-${id}>.content`);
+  const inputElement = contentElement.querySelector("input");
+  if (inputElement) {
     const textareaElement = contentElement.querySelector("textarea");
 
     contentElement.removeChild(inputElement);
@@ -114,7 +114,10 @@ socket.on("note:update", (note) => {
 
     contentElement.appendChild(titleElement);
     contentElement.appendChild(descriptionElement);
-  } catch (error) {
-    console.log(contentElement)
+  } else {
+    const titleElement = contentElement.querySelector("h2");
+    titleElement.innerText = title;
+    const descriptionElement = contentElement.querySelector("p");
+    descriptionElement.innerText = description;
   }
 });
