@@ -39,44 +39,10 @@ socket.on("note:destroy", (id) => {
 
 //update a note
 
-contentNotes.forEach((content) =>
-  content.addEventListener("click", (e) => {
-    try {
-      const titleElement = content.querySelector("h2");
-      const descriptionElement = content.querySelector("p");
-      const title = titleElement.innerText;
-      const description = descriptionElement.innerText;
-      content.removeChild(titleElement);
-      content.removeChild(descriptionElement);
-
-      const titleEditable = document.createElement("input");
-      titleEditable.classList.add("note-title");
-      titleEditable.value = title;
-
-      const descriptionEditable = document.createElement("textarea");
-      descriptionEditable.classList.add("note-description");
-      descriptionEditable.value = description;
-
-      content.appendChild(titleEditable);
-      content.appendChild(descriptionEditable);
-    } catch (error) {}
-  })
-);
+contentNotes.forEach((content) => eventCreateEditableNote(content));
 
 btnsUpdate.forEach((btn) =>
-  btn.addEventListener("click", (e) => {
-    const content = btn.parentElement.querySelector(".content");
-    const titleElement = content.querySelector("input");
-    if (titleElement) {
-      const descriptionElement = content.querySelector("textarea");
-      const id = parseInt(content.parentElement.id.split("-")[1]);
-      socket.emit("note:update", {
-        id,
-        title: titleElement.value,
-        description: descriptionElement.value,
-      });
-    }
-  })
+  eventUpdateNote(btn)
 );
 
 function updateNoteSamePage(note) {
