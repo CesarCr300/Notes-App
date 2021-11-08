@@ -45,45 +45,4 @@ btnsUpdate.forEach((btn) =>
   eventUpdateNote(btn)
 );
 
-function updateNoteSamePage(note) {
-  const { id, title, description } = note;
-  const contentElement = document.querySelector(`#note-${id}>.content`);
-  const inputElement = contentElement.querySelector("input");
-  const textareaElement = contentElement.querySelector("textarea");
-
-  contentElement.removeChild(inputElement);
-  contentElement.removeChild(textareaElement);
-
-  const titleElement = document.createElement("h2");
-  titleElement.innerText = title;
-  const descriptionElement = document.createElement("p");
-  descriptionElement.innerText = description;
-
-  contentElement.appendChild(titleElement);
-  contentElement.appendChild(descriptionElement);
-}
-
-socket.on("note:update", (note) => {
-  const { id, title, description } = note;
-  const contentElement = document.querySelector(`#note-${id}>.content`);
-  const inputElement = contentElement.querySelector("input");
-  if (inputElement) {
-    const textareaElement = contentElement.querySelector("textarea");
-
-    contentElement.removeChild(inputElement);
-    contentElement.removeChild(textareaElement);
-
-    const titleElement = document.createElement("h2");
-    titleElement.innerText = title;
-    const descriptionElement = document.createElement("p");
-    descriptionElement.innerText = description;
-
-    contentElement.appendChild(titleElement);
-    contentElement.appendChild(descriptionElement);
-  } else {
-    const titleElement = contentElement.querySelector("h2");
-    titleElement.innerText = title;
-    const descriptionElement = contentElement.querySelector("p");
-    descriptionElement.innerText = description;
-  }
-});
+socket.on("note:update", note=>updateNote(note));
